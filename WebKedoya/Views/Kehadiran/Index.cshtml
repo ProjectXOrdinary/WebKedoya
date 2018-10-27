@@ -1,0 +1,118 @@
+﻿@model IList<WebKedoya.Models.KehadiranFormViewModel>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Data Kehadiran</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+
+                    <ul class="nav navbar-left panel_toolbox">
+                        <li><a asp-controller="Kehadiran" asp-action="CreateNew"><i class="fa fa-plus"></i> Add Bulk</a></li>
+                    </ul>
+                    <ul class="nav navbar-left panel_toolbox">
+                        <li><a asp-controller="Kehadiran" asp-action="Create"><i class="fa fa-plus"></i> Add Data</a></li>
+                    </ul>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a asp-controller="Kehadiran" asp-action="Index"><i class="fa fa-refresh"></i> Reset Search</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th>
+                                        <input type="checkbox" id="check-all" class="flat">
+                                    </th>
+                                    <th class="column-title" style="width: 15%">@Html.DisplayNameFor(model => model.FirstOrDefault().Tanggal)</th>
+                                    <th class="column-title" style="width: 25%">@Html.DisplayNameFor(model => model.FirstOrDefault().NamaJenisIbadah)</th>
+                                    <th class="column-title" style="width: 25%">@Html.DisplayNameFor(model => model.FirstOrDefault().NamaJenisJemaat)</th>
+                                    <th class="column-title" style="width: 10%">@Html.DisplayNameFor(model => model.FirstOrDefault().Jumlah)</th>
+                                    <th class="column-title no-link last" style="width: 25%" align="center">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{ var odd = false; }
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="@(odd ? " odd": "even" ) pointer">
+                                        <td class="a-center ">
+                                            <input type="checkbox" class="flat" name="table_records">
+                                        </td>
+                                        <td class=" ">@item.Tanggal.ToString("dd/MM/yyyy")</td>
+                                        <td class=" ">@item.NamaJenisIbadah</td>
+                                        <td class=" ">@item.NamaJenisJemaat</td>
+                                        <td align="right" class=" ">@item.Jumlah</td>
+                                        <td class=" last" align="center">
+                                            <a asp-controller="Kehadiran" asp-action="Edit" asp-route-id="@item.IDKehadiran">Edit</a> |
+                                            <a asp-controller="Kehadiran" asp-action="Delete" asp-route-id="@item.IDKehadiran">Delete</a> |
+                                            <a asp-controller="Kehadiran" asp-action="Details" asp-route-id="@item.IDKehadiran">Detail</a>
+                                        </td>
+                                    </tr>
+                                    odd = !odd;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="footer_fixed"  style="text-align:right"  >
+                    <div>
+                        @{
+                            var prevDisabled = 0;// !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = 0; // !Model.HasNextPage ? "disabled" : "";
+                        }
+                        <a asp-action="Index"
+
+                           class="fa fa-arrow-circle-o-left @prevDisabled">
+                            First
+                        </a>
+                        |
+                        <a asp-action="Index"
+                 
+                           class="fa fa-arrow-circle-left @prevDisabled">
+                            Prev
+                        </a>
+                        |
+                        <a asp-action="Index"
+                          
+                           class="fa fa-arrow-circle-right @nextDisabled">
+                            Next
+                        </a>
+                        |
+                        <a asp-action="Index"
+                      
+                           class="fa fa-arrow-circle-o-right @nextDisabled">
+                            Last
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,117 @@
+﻿@model WebKedoya.PaginatedList<WebKedoya.Models.Setting>
+
+<p />
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Pengaturan</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <ul class="nav navbar-left panel_toolbox">
+                    <li><a asp-controller="Setting" asp-action="Create"><i class="fa fa-plus"></i> Add Data</a></li>
+                </ul>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a asp-controller="Setting" asp-action="Index"><i class="fa fa-refresh"></i> Reset Search</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData[" NameSortParm"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]">ID</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData[" NameSortParm"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]">Name</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData[" DateSortParm"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]">Description</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData[" TypeSortParm"]" asp-route-currentFilter="@ViewData[" CurrentFilter"]">Type</a>
+                                </th>
+                                <th align="center">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.SettingID)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SettingName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SettingDescription)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SettingType)</td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.SettingID">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.SettingID">Detail</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.SettingID">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="footer_fixed" style="text-align:right">
+                            <div>
+                                @{
+                                    var prevDisabled = 0;// !Model.HasPreviousPage ? "disabled" : "";
+                                    var nextDisabled = 0; // !Model.HasNextPage ? "disabled" : "";
+                                }
+                                <a asp-action="Index"
+                                   class="fa fa-arrow-circle-o-left @prevDisabled">
+                                    First
+                                </a>
+                                |
+                                <a asp-action="Index"
+                                   class="fa fa-arrow-circle-left @prevDisabled">
+                                    Prev
+                                </a>
+                                |
+                                <a asp-action="Index"
+                                   class="fa fa-arrow-circle-right @nextDisabled">
+                                    Next
+                                </a>
+                                |
+                                <a asp-action="Index"
+                                   class="fa fa-arrow-circle-o-right @nextDisabled">
+                                    Last
+                                </a>
+
+                            </div>
+
+                        </div>
+        </div>
+        </div>
+</div>
+
+
+
+         
+
+
+
+
